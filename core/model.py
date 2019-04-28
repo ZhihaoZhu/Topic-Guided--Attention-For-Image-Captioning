@@ -256,7 +256,7 @@ class CaptionGenerator(object):
     
             with tf.variable_scope('lstm', reuse=(t != 0)):
                 _, (c, h) = lstm_cell(inputs=tf.concat([x[:, t, :], context, attributes_context, f_context], 1), state=[c, h])
-    
+            print("yes")
             logits = self._decode_lstm(x[:, t, :], h, context, dropout=self.dropout, reuse=(t != 0))
             loss += tf.reduce_sum(
                 tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=captions_out[:, t]) * mask[:, t])
